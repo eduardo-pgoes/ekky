@@ -1,0 +1,11 @@
+[Unit]
+Description=ekky drain: run every ready task, SLOTS at a time
+
+[Service]
+Type=oneshot
+ExecStart=%h/ekky/bin/ekky drain
+WorkingDirectory=%h
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+Environment=SLOTS=2
+TimeoutStartSec=infinity
+KillMode=control-group

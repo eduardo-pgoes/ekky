@@ -1,0 +1,10 @@
+[Unit]
+Description=ekky ui: the read-only web view over agent-tasks/, loopback only
+
+[Service]
+ExecStart=%h/ekky/bin/ekky serve
+WorkingDirectory=%h
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

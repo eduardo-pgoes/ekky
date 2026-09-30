@@ -1,0 +1,7 @@
+{
+  "name": "ekky",
+  "version": "0.1.0",
+  "description": "Personal AI task daemon: cut, decompose, load, tackle, review, promote.",
+  "author": { "name": "Eduardo Goes" },
+  "skills": ["./skills"]
+}

@@ -1,0 +1,6 @@
+agent-tasks/
+llms/
+bin/ekky
+ui/node_modules/
+ui/dist/
+ui/.svelte-check/

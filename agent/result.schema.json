@@ -1,0 +1,73 @@
+{
+  "title": "ekky task result",
+  "description": "What the headless agent returns for one attempt at one task. The dispatcher writes it to result.json, renders result.md from it, and sets the task status from the status field.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "summary",
+    "decisions",
+    "deviations",
+    "verify",
+    "question"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "done",
+        "failed",
+        "needs-input"
+      ],
+      "description": "done: every unit committed on the local branch. failed: a step broke and could not be recovered; partial work is WIP-committed. needs-input: a core ambiguity would invalidate more than half the units; nothing built past the point it was found."
+    },
+    "summary": {
+      "type": "string",
+      "description": "One line: what was built, or why it stopped."
+    },
+    "decisions": {
+      "type": "array",
+      "description": "Every fork taken by pick-and-flag. Empty when there were none.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fork",
+          "chosen",
+          "rejected",
+          "why"
+        ],
+        "properties": {
+          "fork": {
+            "type": "string",
+            "description": "The question the task record left open, in one sentence."
+          },
+          "chosen": {
+            "type": "string",
+            "description": "The branch taken."
+          },
+          "rejected": {
+            "type": "string",
+            "description": "The branch not taken, stated at its strongest."
+          },
+          "why": {
+            "type": "string",
+            "description": "One clause: the reason the chosen branch wins."
+          }
+        }
+      }
+    },
+    "deviations": {
+      "type": "string",
+      "description": "Where the built thing differs from the intent card, in prose. Empty string when it matches."
+    },
+    "verify": {
+      "type": "string",
+      "description": "How the reviewer checks it works: the commands to run, the screen to open, the query to fire."
+    },
+    "question": {
+      "type": "string",
+      "description": "Only on needs-input: the single question whose answer unblocks the task, with the options and their consequences. Empty string otherwise."
+    }
+  }
+}
